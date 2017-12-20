@@ -1,5 +1,5 @@
 # SoccerLamp
-A lamp that blinks soccer scores powered by esp8266 and Neopixel Ring
+An IKEA lamp that blinks soccer scores powered by esp8266 and Neopixel Ring
 
 ## Hardware
 - [TVÄRS IKEA Lamp](http://www.ikea.com/at/de/catalog/products/20356136)
