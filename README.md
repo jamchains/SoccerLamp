@@ -2,6 +2,7 @@
 A lamp that blinks soccer scores powered by esp8266 and Neopixel Ring
 
 ## Hardware
+- [TVÄRS IKEA Lamp](http://www.ikea.com/at/de/catalog/products/20356136)
 - esp8266 development board (e.g. [NodeMCU V2](https://www.amazon.de/gp/product/B06Y1LZLLY))
 - [Neopixel Ring](https://www.amazon.de/gp/product/B00KI2RLOI)
 - 1000µF capacitor (to protect your LEDs)
