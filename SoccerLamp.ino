@@ -61,15 +61,7 @@ int liveGoals[2];
 //byte black[] = {0, 0, 0};
 TeamColor black = getMainColor(0);
 
-//byte liveColorHome[] = {0, 0, 0};
-//byte liveColorAway[] = {255, 0, 0};
-
-//int liveGoalsHome = 0;
-//int liveGoalsAway = 0;
-
-
 #define NUM_LEDS 12
-//#define DATA_PIN 2
 
 CRGB leds[NUM_LEDS];
 
