@@ -15,6 +15,7 @@ TeamColor getMainColor(int teamID) {
     //        ret.colors[2] = CRGB::Black;
     //        break;
     //      }
+/**************** La Liga ****************/
     case 81:  {// Barcelona
         ret.nColors = 3;
         ret.colors[0] = CRGB::Brown;
@@ -134,6 +135,222 @@ TeamColor getMainColor(int teamID) {
         ret.colors[1] = CRGB::Yellow;
         break;
       }
+
+/**************** World Cup 2018 ****************/
+      case 808:  {// Russia
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::White;
+          ret.colors[1] = CRGB::Blue;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 801:  {// Saudi Arabia
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::Green;
+          ret.colors[1] = CRGB::White;
+          break;
+      }
+      case 825:  {// Egypt
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Black;
+          break;
+      }
+      case 758:  {// Uruguay
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Blue;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Yellow;
+          break;
+      }
+      case 815:  {// Morocco
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::Green;
+          break;
+      }
+      case 840:  {// Iran
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Green;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 765:  {// Portugal
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Green;
+          ret.colors[1] = CRGB::Red;
+          ret.colors[2] = CRGB::Yellow;
+          break;
+      }
+      case 760:  {// Spain
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::Yellow;
+          break;
+      }
+      case 773:  {// France
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Blue;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 779:  {// Australia
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Blue;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 832:  {// Peru
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::White;
+          break;
+      }
+      case 782:  {// Denmark
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::White;
+          break;
+      }
+      case 762:  {// Argentina
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::LightBlue;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Yellow;
+          break;
+      }
+      case 1066:  {// Iceland
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Blue;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 799:  {// Croatia
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Blue;
+          break;
+      }
+      case 776:  {// Nigeria
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::Green;
+          ret.colors[1] = CRGB::White;
+          break;
+      }
+      case 793:  {// Costa Rica
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Blue;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 780:  {// Serbia
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::Blue;
+          ret.colors[2] = CRGB::White;
+          break;
+      }
+      case 764:  {// Brazil
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Green;
+          ret.colors[1] = CRGB::Yellow;
+          ret.colors[2] = CRGB::Blue;
+          break;
+      }
+      case 788:  {// Switzerland
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::White;
+          break;
+      }
+      case 759:  {// Germany
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Black;
+          ret.colors[1] = CRGB::Red;
+          ret.colors[2] = CRGB::Yellow;
+          break;
+      }
+      case 769:  {// Mexico
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Green;
+          ret.colors[1] = CRGB::White;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 792:  {// Sweden
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::Blue;
+          ret.colors[1] = CRGB::Yellow;
+          break;
+      }
+      case 772:  {// Korea Republic
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::Blue;
+          ret.colors[2] = CRGB::White;
+          break;
+      }
+      case 805:  {// Belgium
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Black;
+          ret.colors[1] = CRGB::Yellow;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 1836:  {// Panama
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Blue;
+          ret.colors[1] = CRGB::Red;
+          ret.colors[2] = CRGB::White;
+          break;
+      }
+      case 802:  {// Tunisia
+        ret.nColors = 2;
+        ret.colors[0] = CRGB::Red;
+        ret.colors[1] = CRGB::White;
+        break;
+      }
+      case 770:  {// England
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::White;
+          ret.colors[1] = CRGB::Red;
+          break;
+      }
+      case 794:  {// Poland
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::Red;
+          ret.colors[1] = CRGB::White;
+          break;
+      }
+      case 804:  {// Senegal
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Green;
+          ret.colors[1] = CRGB::Yellow;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 818:  {// Colombia
+          ret.nColors = 3;
+          ret.colors[0] = CRGB::Yellow;
+          ret.colors[1] = CRGB::Blue;
+          ret.colors[2] = CRGB::Red;
+          break;
+      }
+      case 766:  {// Japan
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::White;
+          ret.colors[1] = CRGB::Red;
+          break;
+      }
+
+/**************** Control ****************/
       case 0: { // Turn off lights
         ret.nColors = 1;
         ret.colors[0] = CRGB::Black;

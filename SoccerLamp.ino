@@ -46,9 +46,10 @@ const char* password = ".......";
 
 const char* apiKey = ".......";
 
-// TODO competitionId as parameter
-const char* leagueTable = "http://api.football-data.org/v1/competitions/455/leagueTable";
-const char* fixtures = "http://api.football-data.org/v1/competitions/455/fixtures?timeFrame=n1";
+// World Cup 2018 Russia
+const char* leagueTable = "http://api.football-data.org/v1/competitions/467/leagueTable";
+const char* standingsGroup = "B";    // "B": Spain
+const char* fixtures = "http://api.football-data.org/v1/competitions/467/fixtures?timeFrame=n1";
 
 /* Standing Status */
 TeamColor standingTeams[NUM_STANDINGS];
@@ -229,10 +230,10 @@ int getStandings() {
 
   Serial.print("Standings: ");
   for (int i = 0; i < NUM_STANDINGS; i++) {
-    int teamId = root["standing"][i]["teamId"];
-    const char* teamName = root["standing"][i]["team"];
+    int teamId = root["standings"][standingsGroup][i]["teamId"];
+    const char* teamName = root["standings"][standingsGroup][i]["team"];
 
-    standingTeams[i] = getMainColor(root["standing"][i]["teamId"]);
+    standingTeams[i] = getMainColor(teamId);
     Serial.printf("%s -> ", teamName);
   }
   Serial.println();
