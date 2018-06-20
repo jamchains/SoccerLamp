@@ -17,6 +17,6 @@ An IKEA lamp that blinks soccer scores powered by esp8266 and Neopixel Ring
 - [football-data.org](https://api.football-data.org) free API key
 
 ## Arduino libraries
-- [esp8266 core for Arduino](https://github.com/esp8266/Arduino)
-- [FastLED](http://fastled.io)
-- [ArduinoJSON](http://arduinojson.org)
+- [esp8266 core for Arduino](https://github.com/esp8266/Arduino) 2.3.0
+- [FastLED](http://fastled.io) 3.1.6
+- [ArduinoJSON](http://arduinojson.org) 5.11.2
