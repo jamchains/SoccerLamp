@@ -334,7 +334,7 @@ String download(const char* url) {
   //Serial.printf("[HTTP] GET... code: %d\n", httpCode);
 
   if (httpCode != HTTP_CODE_OK) {
-    Serial.printf("[HTTP] HTTP Code is not OK, got code %s\n", httpCode);
+    Serial.printf("[HTTP] HTTP Code is not OK, got code %d\n", httpCode);
     http.end();
     return "";
   }
