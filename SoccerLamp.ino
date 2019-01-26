@@ -110,6 +110,7 @@ void setup() {
   //  pinMode(LED_BUILTIN, OUTPUT);
   //  digitalWrite(LED_BUILTIN, HIGH);
 
+  initializeStandings();
   checkUpdates();
 }
 
@@ -204,6 +205,12 @@ void checkUpdates() {
   timeLast = millis();
 }
 
+void initializeStandings() {
+  for (int i = 0; i < NUM_STANDINGS; i++) {
+    // -1 is error
+    standingTeams[i] = getMainColor(-1);
+  }
+}
 
 /**
    Get standing scores
