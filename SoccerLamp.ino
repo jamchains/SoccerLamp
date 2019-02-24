@@ -13,7 +13,7 @@
 #define FASTLED_INTERNAL
 
 //Sometimes, especially on the esp8266, you might have better luck by just tweaking the re-try attempt code with:
-//#define FASTLED_INTERRUPT_RETRY_COUNT 1 // Enable in case of LEDs flickering/jittering
+#define FASTLED_INTERRUPT_RETRY_COUNT 1 // Enable in case of LEDs flickering/jittering
 //#define FASTLED_INTERRUPT_RETRY_COUNT 0
 //#define FASTLED_ALLOW_INTERRUPTS 0  // Use with caution, might disable WiFi!
 #include <FastLED.h>
