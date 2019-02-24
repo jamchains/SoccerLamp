@@ -45,10 +45,9 @@ ESP8266WiFiMulti WiFiMulti;
 
 #define API_KEY "......"
 
-// World Cup 2018 Russia
-const char* leagueTable = "http://api.football-data.org/v1/competitions/467/leagueTable";
-const char* standingsGroup = "B";    // "B": Spain
-const char* fixtures = "http://api.football-data.org/v1/competitions/467/fixtures?timeFrame=n1";
+// 2014 = Spanish La Liga 2018/19
+#define LEAGUE_TABLE "http://api.football-data.org/v2/competitions/2014/standings?standingsType=TOTAL"
+#define FIXTURES "http://api.football-data.org/v2/competitions/2014/matches?status=LIVE"
 
 /* Standing Status */
 TeamColor standingTeams[NUM_STANDINGS];
@@ -56,10 +55,7 @@ TeamColor standingTeams[NUM_STANDINGS];
 /* Live status */
 bool liveGame = false;
 TeamColor liveTeams[2];
-int liveGoals[2];
-
-//byte black[] = {0, 0, 0};
-TeamColor black = getMainColor(0);
+int liveGoals[2] = {0, 0};
 
 #define NUM_LEDS 12
 
@@ -256,59 +252,51 @@ int getLive() {
   String payload = download(FIXTURES);
 
   // TODO move to parse()
-  //Serial.println("Allocate JsonBuffer");
-  const size_t bufferSize = JSON_ARRAY_SIZE(4)
-                            + 18 * JSON_OBJECT_SIZE(1)
-                            + 5 * JSON_OBJECT_SIZE(2) + 3 * JSON_OBJECT_SIZE(3)
-                            + 4 * JSON_OBJECT_SIZE(4) + 4 * JSON_OBJECT_SIZE(8)
-                            + 2060;
-  // FIXME Get the largest real possible
+  // XXX https://arduinojson.org/v5/assistant/
+  const size_t bufferSize = 2112;
   DynamicJsonBuffer jsonBuffer(bufferSize);
 
   //Serial.println("Parse JSON object");
   JsonObject& root = jsonBuffer.parseObject(payload);
 
   if (!root.success()) {
-    Serial.println("Parsing failed!");
-    Serial.println(payload);
+    Serial.println("Parsing live failed!");
+    // Trying to print the payload in a low-memory situation may lead to crash.
+    //Serial.println(payload);
     return -1;
   }
 
   int count = root["count"];
-  Serial.printf("%d match(es) in the next 24 hours.\n", count);
+  Serial.printf("%d live match(es).\n", count);
 
   liveGame = false;
 
   // Set to 0, just in case
-  liveTeams[0] = black;
-  liveTeams[1] = black;
-
-  liveGoals[0] = 0;
-  liveGoals[1] = 0;
+  liveTeams[0] = getMainColor(0);
+  liveTeams[1] = getMainColor(0);
 
   for (int i = 0; i < count; i++) {
-    String status = root["fixtures"][i]["status"];
     // TODO more than one live game
-    if (status.equals("IN_PLAY")) {
-      liveGame = true;
+    liveGame = true;
 
-      int homeTeamId = root["fixtures"][i]["homeTeamId"];
-      int awayTeamId = root["fixtures"][i]["awayTeamId"];
+    int homeTeamId = root["matches"][i]["homeTeam"]["id"];
+    int awayTeamId = root["matches"][i]["awayTeam"]["id"];
 
-      const char* homeTeamName = root["fixtures"][i]["homeTeamName"];
-      const char* awayTeamName = root["fixtures"][i]["awayTeamName"];
+    const char* homeTeamName = root["matches"][i]["homeTeam"]["name"];
+    const char* awayTeamName = root["matches"][i]["awayTeam"]["name"];
 
-      liveTeams[0] = getMainColor(homeTeamId);
-      liveTeams[1] = getMainColor(awayTeamId);
+    liveTeams[0] = getMainColor(homeTeamId);
+    liveTeams[1] = getMainColor(awayTeamId);
 
-      liveGoals[0] = root["fixtures"][i]["result"]["goalsHomeTeam"];
-      liveGoals[1] = root["fixtures"][i]["result"]["goalsAwayTeam"];
+    int homeTeamGoals = root["matches"][i]["score"]["fullTime"]["homeTeam"];
+    int awayTeamGoals = root["matches"][i]["score"]["fullTime"]["awayTeam"];
 
-      Serial.printf("Live: %s (%d) X %s  (%d)\n", homeTeamName, liveGoals[0], awayTeamName, liveGoals[1]);
+    liveGoals[0] = homeTeamGoals;
+    liveGoals[1] = awayTeamGoals;
 
-      return 1;
+    Serial.printf("Live: %s (%d) X %s  (%d)\n", homeTeamName, liveGoals[0], awayTeamName, liveGoals[1]);
 
-    }
+    return 1;
   }
 
   return -1;
@@ -323,7 +311,6 @@ String download(const char* url) {
   // configure traged server and url
   http.begin(url); //HTTP
   http.addHeader("X-Auth-Token", API_KEY);
-  http.addHeader("X-Response-Control", "minified");
 
   //Serial.print("[HTTP] GET...\n");
   // start connection and send HTTP header
