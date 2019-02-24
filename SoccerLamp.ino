@@ -29,9 +29,8 @@
 #define STANDINGS_DELAY 10000
 #define BLEND_DELAY 10
 
-// Non-authenticated clients are allowed for 100 requests per 24 hours (one every 14,4 minutes)
-// Registered clients are allowed for 50 requests per minute by default
-#define LIVE_UPDATE 1 * 60 * 1000  // 1 min
+// Registered clients are allowed for 10 requests per minute (each 6 seconds)
+#define LIVE_UPDATE 1 * 6 * 1000  // 6 sec
 #define STANDINGS_UPDATE 5 * 60 * 1000  // 5 min
 
 // XXX Will overflow after 49 days on
