@@ -1,6 +1,5 @@
 #include <Arduino.h>
 
-#include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
 #include <ESP8266HTTPClient.h>
 
@@ -41,10 +40,10 @@ unsigned long timeNow = 0;
 
 ESP8266WiFiMulti WiFiMulti;
 
-const char* ssid = ".......";
-const char* password = ".......";
+#define SSID "......"
+#define PASSWORD "......"
 
-const char* apiKey = ".......";
+#define API_KEY "......"
 
 // World Cup 2018 Russia
 const char* leagueTable = "http://api.football-data.org/v1/competitions/467/leagueTable";
@@ -92,7 +91,7 @@ void setup() {
   // Might solve LED flickering issues
   //WiFi.setSleepMode(WIFI_NONE_SLEEP);
 
-  WiFiMulti.addAP(ssid, password);
+  WiFiMulti.addAP(SSID, PASSWORD);
 
   // wait for WiFi connection
   // TODO Should we wait on the main loop, in case it gets disconnected?
@@ -216,7 +215,7 @@ void initializeStandings() {
    Get standing scores
 */
 int getStandings() {
-  String payload = download(leagueTable);
+  String payload = download(LEAGUE_TABLE);
 
   //Serial.println("Allocate JsonBuffer");
   const size_t bufferSize = JSON_ARRAY_SIZE(20)
@@ -254,7 +253,7 @@ int getStandings() {
    Get Live scores
 */
 int getLive() {
-  String payload = download(fixtures);
+  String payload = download(FIXTURES);
 
   // TODO move to parse()
   //Serial.println("Allocate JsonBuffer");
@@ -323,7 +322,7 @@ String download(const char* url) {
   //Serial.print("[HTTP] begin...\n");
   // configure traged server and url
   http.begin(url); //HTTP
-  http.addHeader("X-Auth-Token", apiKey);
+  http.addHeader("X-Auth-Token", API_KEY);
   http.addHeader("X-Response-Control", "minified");
 
   //Serial.print("[HTTP] GET...\n");
