@@ -60,6 +60,8 @@ int liveGoals[2] = {0, 0};
 
 CRGB leds[NUM_LEDS];
 
+#define BUZZER D5
+
 void setup() {
   // D10 (GPIO1) = may cause reset; D8 (GPIO15) = extra instructions, D0 is off limits!
   FastLED.addLeds<NEOPIXEL, D4>(leds, NUM_LEDS);
@@ -71,6 +73,9 @@ void setup() {
 
   FastLED.clear();
   test_leds();
+
+  pinMode(BUZZER, OUTPUT);
+  beep_goal();
 
   //delay(3000);
 
@@ -304,6 +309,10 @@ int getLive() {
     int homeTeamGoals = root["matches"][i]["score"]["fullTime"]["homeTeam"];
     int awayTeamGoals = root["matches"][i]["score"]["fullTime"]["awayTeam"];
 
+    if (homeTeamGoals > liveGoals[0] || awayTeamGoals > liveGoals[1]) {
+      beep_goal();
+    }
+
     liveGoals[0] = homeTeamGoals;
     liveGoals[1] = awayTeamGoals;
 
@@ -359,6 +368,12 @@ void partial_fill_solid(struct CRGB* leds, int startPixel, int endPixel, const s
   for (int i = startPixel; i < endPixel; i++) {
     leds[i] = color;
   }
+}
+
+void beep_goal() {
+  digitalWrite(BUZZER, HIGH);
+  delay(1000);
+  digitalWrite(BUZZER, LOW);
 }
 
 void show_black() {
