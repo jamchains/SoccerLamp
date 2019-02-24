@@ -213,30 +213,44 @@ void initializeStandings() {
 int getStandings() {
   String payload = download(LEAGUE_TABLE);
 
-  //Serial.println("Allocate JsonBuffer");
-  const size_t bufferSize = JSON_ARRAY_SIZE(20)
-                            + JSON_OBJECT_SIZE(3)
-                            + 20 * JSON_OBJECT_SIZE(9)
-                            + 4060;
-  //const size_t BUFFER_SIZE = 20000;
-  DynamicJsonBuffer jsonBuffer(bufferSize);
+  // Trying to parse the full payload crashes the ESP8266 due to low memory.
+  // To overcome that, we manually "parse" the standings object to locate the "table" array
+  // and then parse each of the teams separately.
 
-  //Serial.println("Parse JSON object");
-  JsonObject& root = jsonBuffer.parseObject(payload);
-
-  if (!root.success()) {
-    Serial.println("Parsing failed!");
-    Serial.println(payload);
-    return -1;
-  }
+  // Get the first curly bracket after "table"
+  int openBracket = payload.indexOf("{", payload.indexOf("table"));
+  
+  // There's a nested JSON for each standing, let's skip it
+  int closeBracket = payload.indexOf("}", openBracket);
+  closeBracket = payload.indexOf("}", closeBracket + 1);
 
   Serial.print("Standings: ");
   for (int i = 0; i < NUM_STANDINGS; i++) {
-    int teamId = root["standings"][standingsGroup][i]["teamId"];
-    const char* teamName = root["standings"][standingsGroup][i]["team"];
+    String standingsStr = payload.substring(openBracket, closeBracket + 1);
+    // Serial.println(standingsStr);
+
+    // XXX https://arduinojson.org/v5/assistant/
+    const size_t bufferSize = 428;
+    DynamicJsonBuffer jsonBuffer(bufferSize);
+    
+    JsonObject& standing = jsonBuffer.parseObject(standingsStr);
+    if (!standing.success()) {
+      Serial.println("Parsing standings failed!");
+      // Trying to print the payload in a low-memory situation may lead to crash.
+      //Serial.println(payload);
+      return -1;
+    }
+
+    int teamId = standing["team"]["id"];
+    const char* teamName = standing["team"]["name"];
 
     standingTeams[i] = getMainColor(teamId);
     Serial.printf("%s -> ", teamName);
+
+    openBracket = payload.indexOf("{", closeBracket);
+    
+    closeBracket = payload.indexOf("}", openBracket);
+    closeBracket = payload.indexOf("}", closeBracket + 1);
   }
   Serial.println();
 
