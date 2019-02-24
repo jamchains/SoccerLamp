@@ -135,8 +135,28 @@ TeamColor getMainColor(int teamID) {
         ret.colors[1] = CRGB::Yellow;
         break;
       }
+      case 250:  {// Real Valladolid CF
+          ret.nColors = 2;
+          ret.colors[0] = CRGB::White;
+          ret.colors[1] = CRGB::Purple;
+          break;
+        }
+      case 87:  {// Rayo Vallecano de Madrid
+        ret.nColors = 2;
+        ret.colors[0] = CRGB::White;
+        ret.colors[1] = CRGB::Red;
+        break;
+      }
+      case 299:  {// SD Huesca
+        ret.nColors = 2;
+        ret.colors[0] = CRGB::Blue;
+        ret.colors[1] = CRGB::Red;
+        break;
+      }
+        
 
 /**************** World Cup 2018 ****************/
+      /*
       case 808:  {// Russia
           ret.nColors = 3;
           ret.colors[0] = CRGB::White;
@@ -349,6 +369,7 @@ TeamColor getMainColor(int teamID) {
           ret.colors[1] = CRGB::Red;
           break;
       }
+      */
 
 /**************** Control ****************/
       case 0: { // Turn off lights
